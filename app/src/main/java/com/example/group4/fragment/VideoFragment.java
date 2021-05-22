@@ -2,20 +2,13 @@ package com.example.group4.fragment;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.provider.MediaStore;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dueeeke.videocontroller.StandardVideoController;
@@ -25,7 +18,6 @@ import com.dueeeke.videocontroller.component.GestureView;
 import com.dueeeke.videocontroller.component.TitleView;
 import com.dueeeke.videocontroller.component.VodControlView;
 import com.dueeeke.videoplayer.player.VideoView;
-import com.dueeeke.videoplayer.player.VideoViewManager;
 import com.example.group4.R;
 import com.example.group4.adapter.VideoAdapter;
 import com.example.group4.entity.User;
@@ -63,6 +55,7 @@ public class VideoFragment extends BaseFragment implements OnItemChildClickListe
     protected ErrorView mErrorView;
     protected CompleteView mCompleteView;
     protected TitleView mTitleView;
+
     /**
      * 当前播放的位置
      */
@@ -74,7 +67,6 @@ public class VideoFragment extends BaseFragment implements OnItemChildClickListe
     protected int mLastPos = mCurPos;
 
     public VideoFragment() {
-
     }
 
     public static VideoFragment newInstance(int categoryId) {
@@ -82,7 +74,6 @@ public class VideoFragment extends BaseFragment implements OnItemChildClickListe
         fragment.categoryId=categoryId;
         return fragment;
     }
-
 
     @Override
     protected int initLayout() {
@@ -98,6 +89,7 @@ public class VideoFragment extends BaseFragment implements OnItemChildClickListe
 
     @Override
     protected void initData() {
+
         //设置当前用户ID
         Intent intent = getActivity().getIntent();
         User user= (User) intent.getSerializableExtra("user");
@@ -141,6 +133,7 @@ public class VideoFragment extends BaseFragment implements OnItemChildClickListe
                 getVideoList(true);
             }
         });
+
         //下拉加载监听器
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override

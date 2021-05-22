@@ -3,6 +3,7 @@ package com.example.group4.entity;
 import java.io.Serializable;
 
 public class User implements Serializable {
+
     public Integer userId;
     public String username;
     public String password;

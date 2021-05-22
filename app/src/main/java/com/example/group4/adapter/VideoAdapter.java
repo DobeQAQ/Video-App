@@ -89,7 +89,6 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 .transform(new CircleTransform())
                 .into(vh.imgHeader);
 
-
         //封面图
         Picasso.with(mContext)
                 .load(videoEntity.getCoverurl())
@@ -218,7 +217,6 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     mOnItemClickListener.onItemClick(mPosition);
                 }
             }
-
         }
     }
     public void setOnItemChildClickListener(OnItemChildClickListener onItemChildClickListener) {

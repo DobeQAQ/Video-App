@@ -3,11 +3,9 @@ package com.example.group4.fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +19,7 @@ import butterknife.Unbinder;
 import static android.content.Context.MODE_PRIVATE;
 
 public abstract class BaseFragment extends Fragment {
+
     protected View mRootView;
     private Unbinder unbinder;
 
@@ -53,33 +52,14 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void initData();
 
-    public void showToast(String msg) {
-        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
-    }
-
-    public void showToastSync(String msg) {
-        Looper.prepare();
-        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
-        Looper.loop();
-    }
-
-    public void navigateTo(Class cls) {
-        Intent in = new Intent(getActivity(), cls);
-        startActivity(in);
-    }
-
-    public void navigateToWithBundle(Class cls, Bundle bundle) {
-        Intent in = new Intent(getActivity(), cls);
-        in.putExtras(bundle);
-        startActivity(in);
-    }
-
+    //退出系统
     public void navigateToWithFlag(Class cls, int flags) {
         Intent in = new Intent(getActivity(), cls);
         in.setFlags(flags);
         startActivity(in);
     }
 
+    //存储当前皮肤数据
     protected void insertVal(String key, String val) {
         SharedPreferences sp = getActivity().getSharedPreferences("sp_group4", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
@@ -87,16 +67,10 @@ public abstract class BaseFragment extends Fragment {
         editor.commit();
     }
 
+    //当前皮肤查询
     protected String findByKey(String key) {
         SharedPreferences sp = getActivity().getSharedPreferences("sp_group4", MODE_PRIVATE);
         return sp.getString(key, "");
-    }
-
-    protected void removeByKey(String key) {
-        SharedPreferences sp = getActivity().getSharedPreferences("sp_group4", MODE_PRIVATE);
-        SharedPreferences.Editor edit = sp.edit();
-        edit.remove(key);
-        edit.commit();
     }
 
     protected VideoViewManager getVideoViewManager() {

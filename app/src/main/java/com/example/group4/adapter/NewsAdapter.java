@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.group4.R;
 import com.example.group4.entity.NewsEntity;
-import com.example.group4.listener.OnItemClickListener;
 import com.example.group4.view.CircleTransform;
 import com.squareup.picasso.Picasso;
 
@@ -20,7 +19,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
     private List<NewsEntity> datas = new ArrayList<>();
@@ -68,7 +67,7 @@ public class NewsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView title;
         private TextView author;

@@ -34,10 +34,10 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 //        只有创建表格时调用
         //用于创建表字段   create
-        String sql="create table user("
-                +"user_id integer primary key autoincrement,"
-                +"username text,"
-                +"password text)";
+        String sql = "create table user("
+                + "user_id integer primary key autoincrement,"
+                + "username text,"
+                + "password text)";
         db.execSQL(sql);
     }
 

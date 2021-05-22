@@ -1,13 +1,11 @@
 package com.example.group4.activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -21,23 +19,19 @@ import com.dueeeke.videocontroller.component.VodControlView;
 import com.dueeeke.videoplayer.player.VideoView;
 import com.example.group4.R;
 import com.example.group4.adapter.MyCollectAdapter;
-import com.example.group4.adapter.MyLikeAdapter;
-import com.example.group4.adapter.VideoAdapter;
-import com.example.group4.entity.User;
 import com.example.group4.entity.VideoEntity;
 import com.example.group4.listener.OnItemChildClickListener;
 import com.example.group4.service.Impl.VideoServiceImpl;
 import com.example.group4.service.VideoService;
 import com.example.group4.util.Tag;
 import com.example.group4.util.Utils;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MyCollectActivity extends BaseActivity implements OnItemChildClickListener {
 
-    private  int userId;
+    private int userId;
     private RecyclerView recyclerView;
     private MyCollectAdapter videoAdapter;
     private List<VideoEntity> datas = new ArrayList<>();
@@ -69,7 +63,7 @@ public class MyCollectActivity extends BaseActivity implements OnItemChildClickL
     protected void initView() {
         initVideoView();//初始化视频播放器
         recyclerView = findViewById(R.id.recyclerView);
-        ivback=findViewById(R.id.my_back);
+        ivback = findViewById(R.id.my_back);
     }
 
     /**
@@ -105,7 +99,7 @@ public class MyCollectActivity extends BaseActivity implements OnItemChildClickL
     protected void initData() {
         //设置当前用户ID
         Intent intent = getIntent();
-        userId=intent.getIntExtra("userId",0);
+        userId = intent.getIntExtra("userId", 0);
 
         //列表，线性布局效果，使用线性布局管理器，垂直排列
         linearLayoutManager = new LinearLayoutManager(this);
@@ -150,8 +144,8 @@ public class MyCollectActivity extends BaseActivity implements OnItemChildClickL
      * 获取收藏的datas数据
      */
     private void listVideo() {
-        VideoService videoService=new VideoServiceImpl(this);
-        datas=videoService.listVideoByMyCollect(userId);
+        VideoService videoService = new VideoServiceImpl(this);
+        datas = videoService.listVideoByMyCollect(userId);
         videoAdapter.setDatas(datas);
         videoAdapter.notifyDataSetChanged();
     }
@@ -198,6 +192,7 @@ public class MyCollectActivity extends BaseActivity implements OnItemChildClickL
 
     /**
      * 开始播放
+     *
      * @param position 列表位置
      */
     protected void startPlay(int position) {
@@ -206,9 +201,6 @@ public class MyCollectActivity extends BaseActivity implements OnItemChildClickL
             releaseVideoView();
         }
         VideoEntity videoEntity = datas.get(position);
-        //边播边存
-//        String proxyUrl = ProxyVideoCacheManager.getProxy(getActivity()).getProxyUrl(videoBean.getUrl());
-//        mVideoView.setUrl(proxyUrl);
 
         mVideoView.setUrl(videoEntity.getPlayurl());
         mTitleView.setTitle(videoEntity.getVtitle());

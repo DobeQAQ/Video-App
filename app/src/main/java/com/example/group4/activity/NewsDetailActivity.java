@@ -1,10 +1,6 @@
 package com.example.group4.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,7 +13,6 @@ import com.squareup.picasso.Picasso;
 public class NewsDetailActivity extends BaseActivity {
 
     private ImageView ivback;
-//    private ImageView ivCollect;
     private TextView tvDetail;
     private TextView tvTitle;
     private ImageView ivHeader;
@@ -31,20 +26,18 @@ public class NewsDetailActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        ivback=findViewById(R.id.back);
-//        ivCollect=findViewById(R.id.collect);
-        tvDetail=findViewById(R.id.detail);
-        tvTitle=findViewById(R.id.detail_title);
-        ivHeader=findViewById(R.id.detail_header);
-        tvAuthor=findViewById(R.id.detail_author);
-        tvTime=findViewById(R.id.detail_time);
+        ivback = findViewById(R.id.back);
+        tvDetail = findViewById(R.id.detail);
+        tvTitle = findViewById(R.id.detail_title);
+        ivHeader = findViewById(R.id.detail_header);
+        tvAuthor = findViewById(R.id.detail_author);
+        tvTime = findViewById(R.id.detail_time);
     }
 
     @Override
     protected void initData() {
         Intent intent = getIntent();
-        NewsEntity newsEntity= (NewsEntity) intent.getSerializableExtra("news");
-
+        NewsEntity newsEntity = (NewsEntity) intent.getSerializableExtra("news");
 
 
         ivback.setOnClickListener(new View.OnClickListener() {
@@ -54,13 +47,6 @@ public class NewsDetailActivity extends BaseActivity {
             }
         });
 
-//        ivCollect.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-
         tvDetail.setText(newsEntity.getNewsContent());
         tvTitle.setText(newsEntity.getNewsTitle());
         Picasso.with(mContext)
@@ -69,9 +55,5 @@ public class NewsDetailActivity extends BaseActivity {
                 .into(ivHeader);
         tvAuthor.setText(newsEntity.getAuthorName());
         tvTime.setText(newsEntity.getReleaseDate());
-
-//        tvDetail.setMovementMethod(ScrollingMovementMethod.getInstance());
     }
-
-
 }

@@ -21,7 +21,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class MyLikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class MyLikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
     private Context mContext;
     private List<VideoEntity> datas;
 
@@ -79,7 +80,7 @@ public class MyLikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView tvTitle;
         private TextView tvAuthor;
         private ImageView imgHeader;

@@ -15,15 +15,15 @@ public class NewsServiceImpl implements NewsService {
 
     private DBHelper dbHelper;
 
-    public NewsServiceImpl(Context context){
-        dbHelper=DBHelper.getInstance(context);
+    public NewsServiceImpl(Context context) {
+        dbHelper = DBHelper.getInstance(context);
     }
 
     @Override
     public List<NewsEntity> listNews() {
-        List<NewsEntity> list=new ArrayList<>();
-        SQLiteDatabase db=dbHelper.getReadableDatabase();
-        String sql="select n.news_id news_id,\n" +
+        List<NewsEntity> list = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String sql = "select n.news_id news_id,\n" +
                 "\t\t\t n.news_title news_title,\n" +
                 "\t\t\t n.author_name author_name,\n" +
                 "\t\t\t n.header_url header_url,\n" +
@@ -31,9 +31,9 @@ public class NewsServiceImpl implements NewsService {
                 "\t\t\t n.news_content news_content\n" +
                 "\t\t\t from news n\n" +
                 "\t\t\t ORDER BY n.release_date DESC";
-        Cursor cursor=db.rawQuery(sql,null);
-        while(cursor.moveToNext()){
-            NewsEntity newsEntity=new NewsEntity();
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            NewsEntity newsEntity = new NewsEntity();
             newsEntity.setNewsId(cursor.getInt(cursor.getColumnIndex("news_id")));
             newsEntity.setNewsTitle(cursor.getString(cursor.getColumnIndex("news_title")));
             newsEntity.setAuthorName(cursor.getString(cursor.getColumnIndex("author_name")));

@@ -1,29 +1,19 @@
 package com.example.group4.fragment;
 
 import android.content.Intent;
-import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.group4.R;
-import com.example.group4.activity.HomeActivity;
 import com.example.group4.activity.NewsDetailActivity;
 import com.example.group4.adapter.NewsAdapter;
-import com.example.group4.adapter.VideoAdapter;
 import com.example.group4.entity.NewsEntity;
 import com.example.group4.entity.User;
-import com.example.group4.entity.VideoEntity;
 import com.example.group4.service.Impl.NewsServiceImpl;
-import com.example.group4.service.Impl.VideoServiceImpl;
 import com.example.group4.service.NewsService;
-import com.example.group4.service.VideoService;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -34,30 +24,26 @@ import java.util.List;
 
 public class NewsFragment extends BaseFragment {
 
-    private  int userId;
+    private int userId;
     private RecyclerView recyclerView;
     private RefreshLayout refreshLayout;
 
     private int pageNum = 1;//当前页数
-    private int pageMaxNum=0;//总页数
-    private static final int PAGESIZE=6;//每页条数
+    private int pageMaxNum = 0;//总页数
+    private static final int PAGESIZE = 6;//每页条数
     private List<NewsEntity> datas = new ArrayList<>();
     private List<NewsEntity> currentDatas = new ArrayList<>();//大小<=PAGESIZE
 
     private NewsAdapter newsAdapter;
     private LinearLayoutManager linearLayoutManager;
 
-
-
     public NewsFragment() {
     }
-
 
     public static NewsFragment newInstance() {
         NewsFragment fragment = new NewsFragment();
         return fragment;
     }
-
 
     @Override
     protected int initLayout() {
@@ -74,8 +60,8 @@ public class NewsFragment extends BaseFragment {
     protected void initData() {
         //设置当前用户ID
         Intent intent = getActivity().getIntent();
-        User user= (User) intent.getSerializableExtra("user");
-        userId=user.getUserId();
+        User user = (User) intent.getSerializableExtra("user");
+        userId = user.getUserId();
 
         //列表，线性布局效果，使用线性布局管理器，垂直排列
         linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -93,8 +79,8 @@ public class NewsFragment extends BaseFragment {
             public void onItemClick(Serializable obj) {
                 NewsEntity newsEntity = (NewsEntity) obj;
                 Intent in = new Intent(getActivity(), NewsDetailActivity.class);
-                in.putExtra("user",user);
-                in.putExtra("news",newsEntity);
+                in.putExtra("user", user);
+                in.putExtra("news", newsEntity);
                 startActivity(in);
             }
         });
@@ -121,19 +107,18 @@ public class NewsFragment extends BaseFragment {
     }
 
 
-
     /**
      * 获取所有datas的数据
      */
     private void listNewsList() {
-        NewsService newsService=new NewsServiceImpl(this.getActivity());
-        datas=newsService.listNews();
-        if(pageMaxNum==0){
+        NewsService newsService = new NewsServiceImpl(this.getActivity());
+        datas = newsService.listNews();
+        if (pageMaxNum == 0) {
             //第一页
-            for(int i=0,j=1; j<=PAGESIZE&&i<datas.size(); i++,j++){
+            for (int i = 0, j = 1; j <= PAGESIZE && i < datas.size(); i++, j++) {
                 currentDatas.add(datas.get(i));
             }
-            pageMaxNum=(datas.size()+PAGESIZE-1)/PAGESIZE;//总页数
+            pageMaxNum = (datas.size() + PAGESIZE - 1) / PAGESIZE;//总页数
             newsAdapter.setDatas(currentDatas);
             newsAdapter.notifyDataSetChanged();
         }
@@ -142,27 +127,28 @@ public class NewsFragment extends BaseFragment {
 
     /**
      * 刷新页面数据
+     *
      * @param isRefresh
      */
     private void getNewsList(boolean isRefresh) {
-        if(isRefresh){
+        if (isRefresh) {
             //isRefresh=true，上拉刷新，刷新动画true
             refreshLayout.finishRefresh(true);
             Toast.makeText(getActivity(), "已经是最新数据了", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             //isRefresh=false，下拉加载，加载动画true
             refreshLayout.finishLoadMore(true);
-            if(pageNum>=pageMaxNum){
+            if (pageNum >= pageMaxNum) {
                 Toast.makeText(getActivity(), "没有更多数据了", Toast.LENGTH_SHORT).show();
-            }else{
-                int pos=PAGESIZE*pageNum;
-                if(pos>=datas.size()){
-                    pos=datas.size()-1;
+            } else {
+                int pos = PAGESIZE * pageNum;
+                if (pos >= datas.size()) {
+                    pos = datas.size() - 1;
                 }
                 pageNum++;
 
                 //多加载一页数据
-                for(int i=(pageNum-1)*PAGESIZE,j=1; j<=PAGESIZE&&i<datas.size(); i++,j++){
+                for (int i = (pageNum - 1) * PAGESIZE, j = 1; j <= PAGESIZE && i < datas.size(); i++, j++) {
                     currentDatas.add(datas.get(i));
                 }
 

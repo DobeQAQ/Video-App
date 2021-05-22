@@ -11,6 +11,7 @@ public class CircleTransform implements Transformation {
 
     /**
      * 头像转换为原型
+     *
      * @param source
      * @return
      */

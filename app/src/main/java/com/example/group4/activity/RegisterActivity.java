@@ -1,8 +1,5 @@
 package com.example.group4.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +8,7 @@ import com.example.group4.MainActivity;
 import com.example.group4.R;
 import com.example.group4.service.Impl.UserServiceImpl;
 import com.example.group4.service.UserService;
+import com.example.group4.util.StringUtils;
 
 public class RegisterActivity extends BaseActivity {
 
@@ -37,21 +35,19 @@ public class RegisterActivity extends BaseActivity {
             public void onClick(View v) {
                 String username = etAccount.getText().toString().trim();
                 String password = etPwd.getText().toString().trim();
-                if(username.isEmpty()||password.isEmpty()){
+                if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password) ) {
                     showToast("用户名或密码为空");
-                }else{
-                    UserService userService=new UserServiceImpl(RegisterActivity.this);
+                } else {
+                    UserService userService = new UserServiceImpl(RegisterActivity.this);
                     //插入用户信息
-                    if(userService.register(username,password)){
+                    if (userService.register(username, password)) {
                         showToast("注册成功");
                         navigateTo(MainActivity.class);
-                    }else{
+                    } else {
                         showToast("注册失败，用户名已存在");
                     }
                 }
-
             }
         });
     }
-
 }

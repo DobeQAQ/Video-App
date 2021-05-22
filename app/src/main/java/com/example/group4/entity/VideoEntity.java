@@ -3,6 +3,7 @@ package com.example.group4.entity;
 import java.io.Serializable;
 
 public class VideoEntity implements Serializable {
+
     /**
      * vid : 1
      * vtitle : 青龙战甲搭配机动兵，P城上空肆意1V4

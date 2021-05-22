@@ -80,7 +80,7 @@ public class MyCollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView tvTitle;
         private TextView tvAuthor;
         private ImageView imgHeader;
